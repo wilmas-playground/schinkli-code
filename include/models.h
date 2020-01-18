@@ -29,11 +29,11 @@ struct Oregano
   _pump (pumpi)
   {};
   
-  //todo: implement for web setup
-  void set_hour(int hour);
+  //todo: implement the safe way, add debug msgs 
+  void set_hour(int hour){ _stunde = hour; };
   void set_dauer(int dauer){ _dauer = dauer * 1000; }
   uint32_t get_dauer(){ return _dauer; }
-  void set_day(String day);
+  void set_day(String day) { _tag = day; };
 
   void pumpe_aktivieren()
   {

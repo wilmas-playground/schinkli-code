@@ -90,12 +90,12 @@ void setup(){
   // Send web page with input fields to client
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send_P(200, "text/html", index_html);
-  }(
-  // Send a GET request to <ESP_I)P>/get?due_day_1=<inputMessage>
-  server.("/get", HTTP_GET, [] (AsyncWebS)erverRequest *request) {
+  });
+  // Send a GET request to <ESP_IP>/get?due_day_1=<inputMessage>
+  server.on("/get", HTTP_GET, [](AsyncWebServerRequest *request) {
     String inputMessage;
     String inputParam;
-(  // GET input1 value on <ESP_IP>/get?input)1=<inputMessage>
+    // GET input1 value on <ESP_IP>/get?input)1=<inputMessage>
     if (request->hasParam(PARAM_INPUT_DAY_1)) {
       hochbeet.set_day(request->getParam(PARAM_INPUT_DAY_1)->value());
     }

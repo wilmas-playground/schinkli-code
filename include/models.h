@@ -29,10 +29,34 @@ struct Oregano
   _pump (pumpi)
   {};
   
-  //todo: implement the safe way, add debug msgs 
-  void set_hour(int hour){ _stunde = hour; };
-  void set_dauer(int dauer){ _dauer = dauer * 1000; }
+  //todo: implement the safe way, add debug msgs
+  void set_hour(int hour)
+  { 
+    if(hour < 24) {
+      _stunde = hour;
+    }
+    else
+    {
+      _stunde = 0;
+    }
+    Serial.print("Giessen um ");
+    Serial.print(_stunde);
+    Serial.println(":00 Uhr");
+  };
+
+  void set_dauer(int dauer){
+    if(dauer > 600)
+    {
+      dauer = 600;
+    }
+    _dauer = dauer * 1000;
+    Serial.print("Pumpe ");
+    Serial.print(dauer);
+    Serial.println(" sekuden einschalten");
+  };
+
   uint32_t get_dauer(){ return _dauer; }
+  
   void set_day(String day) { _tag = day; };
 
   void pumpe_aktivieren()
@@ -40,13 +64,17 @@ struct Oregano
     _pump.ein();
     _startzeit = millis();
     _running = true;
-    Serial.println("Hochbeet Pumpe eingeschaltet");
+    Serial.print("Pumpe ");
+    Serial.print(_name);
+    Serial.println(" eingeschaltet");
   };
   void pumpe_deaktivieren()
   {
     _pump.aus();
     _running = false;
-    Serial.println("Hochbeet Pumpe ausgeschaltet");
+    Serial.print("Pumpe ");
+    Serial.print(_name);
+    Serial.println(" ausgeschaltet");
   };
     
   const String _name;

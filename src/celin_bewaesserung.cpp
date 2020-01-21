@@ -95,7 +95,7 @@ void setup(){
   server.on("/get", HTTP_GET, [](AsyncWebServerRequest *request) {
     String inputMessage;
     String inputParam;
-    // GET input1 value on <ESP_IP>/get?input)1=<inputMessage>
+    
     if (request->hasParam(PARAM_INPUT_DAY_1)) {
       hochbeet.set_day(request->getParam(PARAM_INPUT_DAY_1)->value());
     }
@@ -105,14 +105,13 @@ void setup(){
     if (request->hasParam(PARAM_INPUT_DURATION_1)) {
       hochbeet.set_dauer(request->getParam(PARAM_INPUT_DURATION_1)->value().toInt());
     }
-    Serial.println(inputMessage);
     request->send_P(200, "text/html", index_html);
-
+    
+    Serial.println(inputMessage);
   });
 
   server.onNotFound(notFound);
   server.begin();
-
 }
 
 void loop() {

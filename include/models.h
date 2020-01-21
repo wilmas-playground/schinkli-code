@@ -29,7 +29,6 @@ struct Oregano
   _pump (pumpi)
   {};
   
-  //todo: implement the safe way, add debug msgs
   void set_hour(int hour)
   { 
     if(hour < 24) {
@@ -68,6 +67,7 @@ struct Oregano
     Serial.print(_name);
     Serial.println(" eingeschaltet");
   };
+
   void pumpe_deaktivieren()
   {
     _pump.aus();
@@ -84,9 +84,10 @@ struct Oregano
   bool _aktiv = false;
   bool _running = false;
   unsigned long _startzeit;
+
 private:
 
   Pumpi& _pump;
-  uint32_t _dauer = 0;   // in millisekunden
+  uint32_t _dauer = 0; // in millisekunden
 
 };

@@ -1,17 +1,20 @@
 #include<Arduino.h>
 
-struct Pumpi
+struct Pump
 {
   
-  Pumpi(int anschluss)
+  Pump(int anschluss)
   {
     pin = anschluss;
   }
   
+  /// Pumpe einschalten
   void ein()
   {
     digitalWrite(pin, HIGH);
   }
+
+  /// Pumpe ausschalten
   void aus()
   {
     digitalWrite(pin, LOW);
@@ -22,13 +25,18 @@ private:
   
 };
 
-struct Oregano
+struct Plant
 {
-  Oregano(String namen, Pumpi& pumpi) :
+  Plant(String namen, Pump& pump) :
   _name (namen),
-  _pump (pumpi)
+  _pump (pump)
   {};
   
+  /**
+   * Stunde in der die Pflanze gegossen wird
+   * 
+   * @param hour Stunde von 0 bis 23
+   */
   void set_hour(int hour)
   { 
     if(hour < 24) {
@@ -43,6 +51,11 @@ struct Oregano
     Serial.println(":00 Uhr");
   };
 
+  /**
+   * Einschaltdauer der Pumpe setzen
+   * 
+   * @param dauer Dauer in sekunden
+   */
   void set_dauer(int dauer){
     if(dauer > 600)
     {
@@ -54,8 +67,18 @@ struct Oregano
     Serial.println(" sekuden einschalten");
   };
 
+  /**
+   * Einschaltdauer der Pumpe abfragen
+   * 
+   * @return Dauer in milli sekunden
+   */
   uint32_t get_dauer(){ return _dauer; }
   
+  /**
+   * Wochentag an dem gegossen wird
+   * 
+   * @param day Wochentag in Englisch
+   */
   void set_day(String day) 
   { 
     _tag = day;
@@ -65,6 +88,7 @@ struct Oregano
     Serial.println(" giessen"); 
   };
 
+  /// Pumpe einschalten
   void pumpe_aktivieren()
   {
     _pump.ein();
@@ -75,6 +99,7 @@ struct Oregano
     Serial.println(" eingeschaltet");
   };
 
+  /// Pumpe ausschalten
   void pumpe_deaktivieren()
   {
     _pump.aus();
@@ -94,7 +119,7 @@ struct Oregano
 
 private:
 
-  Pumpi& _pump;
+  Pump& _pump;
   uint32_t _dauer = 0; // in millisekunden
 
 };

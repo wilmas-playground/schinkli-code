@@ -20,8 +20,8 @@ WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org", utcOffsetInSeconds);
 
 // systems
-Pumpi _p1 {D0};
-Oregano hochbeet {"Hochbeet", _p1};
+Pump _p1 {D0};
+Plant hochbeet {"Hochbeet", _p1};
 
 // web UI server
 AsyncWebServer server(80);
@@ -59,17 +59,12 @@ const char index_html[] PROGMEM = R"rawliteral(
   </form>
 </body></html>)rawliteral";
 
+/// show a 404 page for bad access
 void notFound(AsyncWebServerRequest *request) {
   request->send(404, "text/plain", "Not found");
 }
 
 void setup(){
-
-  // Test setup
-  hochbeet._tag = "Sunday";
-  hochbeet._stunde = 18;
-  hochbeet.set_dauer(5);
-  // Test end
 
   Serial.begin(115200);
 

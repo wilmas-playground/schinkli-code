@@ -56,7 +56,14 @@ struct Oregano
 
   uint32_t get_dauer(){ return _dauer; }
   
-  void set_day(String day) { _tag = day; };
+  void set_day(String day) 
+  { 
+    _tag = day;
+    Serial.print(_name);
+    Serial.print(" am ");
+    Serial.print(_tag);
+    Serial.println(" giessen"); 
+  };
 
   void pumpe_aktivieren()
   {

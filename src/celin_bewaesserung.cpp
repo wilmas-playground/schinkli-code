@@ -39,7 +39,7 @@ const char index_html[] PROGMEM = R"rawliteral(
   <meta name="viewport" content="width=device-width, initial-scale=1">
   </head><body>
   <h1> Schinkli's Bewaesserungssystem </h1>
-  <h2> Oregano </h2>
+  <h2> Hochbeet </h2>
   <form action="/get">
     <p> Wochentag: </p> 
     <input type="text" name="due_day_1">

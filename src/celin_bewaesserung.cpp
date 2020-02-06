@@ -19,9 +19,8 @@ String daysOfTheWeek[7] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org", utcOffsetInSeconds);
 
-// systems
-Pump _p1 {D0};
-Plant hochbeet {"Hochbeet", _p1};
+// plants
+Plant hochbeet {"Hochbeet", D0};
 
 // web UI server
 AsyncWebServer server(80);

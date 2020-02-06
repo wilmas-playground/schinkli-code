@@ -1,36 +1,13 @@
 #include<Arduino.h>
 
-struct Pump
-{
-  
-  Pump(int anschluss)
-  {
-    pin = anschluss;
-  }
-  
-  /// Pumpe einschalten
-  void ein()
-  {
-    digitalWrite(pin, HIGH);
-  }
-
-  /// Pumpe ausschalten
-  void aus()
-  {
-    digitalWrite(pin, LOW);
-  }
-    
-private:
-  uint8_t pin;
-  
-};
-
 struct Plant
 {
-  Plant(String namen, Pump& pump) :
+  Plant(String namen, int pump_pin) :
   _name (namen),
-  _pump (pump)
-  {};
+  _pump (pump_pin)
+  {
+    pinMode(_pump, OUTPUT);
+  };
   
   /**
    * Stunde in der die Pflanze gegossen wird
@@ -91,7 +68,7 @@ struct Plant
   /// Pumpe einschalten
   void pumpe_aktivieren()
   {
-    _pump.ein();
+    digitalWrite(_pump, HIGH);
     _startzeit = millis();
     _running = true;
     Serial.print("Pumpe ");
@@ -102,7 +79,7 @@ struct Plant
   /// Pumpe ausschalten
   void pumpe_deaktivieren()
   {
-    _pump.aus();
+    digitalWrite(_pump, HIGH);
     _running = false;
     Serial.print("Pumpe ");
     Serial.print(_name);
@@ -119,7 +96,7 @@ struct Plant
 
 private:
 
-  Pump& _pump;
+  int _pump;
   uint32_t _dauer = 0; // in millisekunden
 
 };

@@ -1,18 +1,7 @@
-# Bewässerungssystem für Pflanzen
+# Bewässerungssystem für Pflanzen auf ESP8266
 
-## TODOs:
+## Bestandteile:
 
-elektronik für direkt an esp
-
-- FET für Pumpe
-- knopf für setup (deep sleep umgehen)
-- batterieschaltung
-
-soft:
-
-- deep sleep
-- setup knopf implementieren
-
-weiterführend:
-
-- esp als leitsystem, Pumpen über shelly und mqtt
+Software: [schinkli-code](https://github.com/wilmas-playground/schinkli-code)
+Controller: schinkli-brain
+Pump Drivers: schinkli-pump-shield
